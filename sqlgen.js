@@ -1,4 +1,13 @@
+const mongoose = require('mongoose')
+const StationData = require('./src/Database/StationData')
 
+
+async function main() {
+    mongoose.connect('mongodb://127.0.0.1:27017/meteo')
+    console.log('Connexion à la base de données effectuée.')
+}
+
+main().catch(error => console.log(error))
 
 function genererListeDatesMois(annee, mois) {
     const listeDates = [];
@@ -42,12 +51,14 @@ function genererListeDatesMois(annee, mois) {
     }
 
     // Fonction pour déterminer le nombre de décimales d'un nombre
-    function getDecimalPlaces(number) {
+  function getDecimalPlaces(number) {
         const decimalPart = String(number).split('.')[1];
         return decimalPart ? decimalPart.length : 0;
     }
 
-const genererData = () => {
+const genererData = async() => {
+
+    const dataList = []
 
     for(let i = 0; i < listeDatesJuin2023.length; i++) {
 
@@ -63,11 +74,29 @@ const genererData = () => {
             }
         }
 
-        console.log(JSON.stringify(objetGenere))
+        dataList.push(objetGenere)
     }
 
+    for(const data of dataList) {
+        const item = new StationData({
+            "stationId": data['stationId'],
+            "dataDate": data['dataDate'],
+            "datas": data['datas'],
+        })
+
+        await item.save()
+        console.log("Inséré")
+    }
+    console.log("Generation des données")
 }
 
+const emptyDatabase = async() => {
+    await StationData.deleteMany({})
+    console.log('Tout a été supprimé')
+}
+
+
 genererData()
+//emptyDatabase()
 
   
