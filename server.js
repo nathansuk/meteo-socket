@@ -16,7 +16,7 @@ wss.on('connection', function connection(ws) {
     }
     console.log('Reçu: %s', JSON.stringify(transformedData));
 
-    ws.send("data", transformedData)
+    ws.send(JSON.stringify(transformedData))
     console.log('EMISSION EFFECTUEE');
     
   });
