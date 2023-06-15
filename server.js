@@ -14,7 +14,7 @@ wss.on('connection', function connection(ws) {
       "dataDate": new Date(),
       "datas": jsonObject["datas"]
     }
-    console.log('Reçu: %s', transformedData);
+    console.log('Reçu: %s', JSON.stringify(transformedData));
   });
 
   ws.send('something');
