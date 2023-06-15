@@ -10,7 +10,7 @@ wss.on('connection', function connection(ws) {
   const sendResponse = (data) => {
       ws.send(JSON.stringify(data))
   }
-  
+
   ws.on('message', function message(data) {
     const jsonObject = JSON.parse(data)
     const transformedData = {
@@ -25,5 +25,4 @@ wss.on('connection', function connection(ws) {
     
   });
 
-  ws.send('something');
 });
