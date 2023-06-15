@@ -8,7 +8,7 @@ wss.on('connection', function connection(ws) {
   ws.on('error', console.error);
 
   const sendResponse = (data) => {
-      ws.send(JSON.stringify(data))
+      ws.send("Par pitié")
   }
 
   ws.on('message', function message(data) {
