@@ -8,7 +8,12 @@ wss.on('connection', function connection(ws) {
   ws.on('error', console.error);
 
   ws.on('message', function message(data) {
-    console.log('Reçu: %s', data);
+    const transformedData = {
+      "stationId": data["stationId"],
+      "dataDate": new Date(),
+      "datas": data["datas"]
+    }
+    console.log('Reçu: %s', transformedData);
   });
 
   ws.send('something');
