@@ -7,6 +7,10 @@ wss.on('connection', function connection(ws) {
   console.log('Connexion au serveur socket')
   ws.on('error', console.error);
 
+  const sendResponse = (data) => {
+      ws.send(JSON.stringify(data))
+  }
+  
   ws.on('message', function message(data) {
     const jsonObject = JSON.parse(data)
     const transformedData = {
@@ -16,7 +20,7 @@ wss.on('connection', function connection(ws) {
     }
     console.log('Reçu: %s', JSON.stringify(transformedData));
 
-    ws.send(JSON.stringify(transformedData))
+    sendResponse(transformedData)
     console.log('EMISSION EFFECTUEE');
     
   });
