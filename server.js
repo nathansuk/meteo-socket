@@ -8,10 +8,11 @@ wss.on('connection', function connection(ws) {
   ws.on('error', console.error);
 
   ws.on('message', function message(data) {
+    const jsonObject = JSON.parse(data)
     const transformedData = {
-      "stationId": data["stationId"],
+      "stationId": jsonObject["stationId"],
       "dataDate": new Date(),
-      "datas": data["datas"]
+      "datas": jsonObject["datas"]
     }
     console.log('Reçu: %s', transformedData);
   });
