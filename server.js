@@ -1,6 +1,6 @@
 const { WebSocketServer } = require('ws');
 
-const wss = new WebSocketServer({ port: 8081 });
+const wss = new WebSocketServer({ port: 8080 });
 const connections = []
 console.log('Serveur socket démarré')
 
