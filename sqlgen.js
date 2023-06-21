@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const StationData = require('./src/Database/StationData')
-
+const Station = require('./src/Database/Station.js')
 
 async function main() {
     mongoose.connect('mongodb://127.0.0.1:27017/meteo')
@@ -70,7 +70,9 @@ const genererData = async() => {
                 humidity: generateFloatBetween(0, 100),
                 temperature: generateFloatBetween(0, 45),
                 pressure: generateFloatBetween(800, 1400),
-                luminosity: generateFloatBetween(0, 100)
+                luminosity: generateFloatBetween(0, 100),
+                rainfall: generateFloatBetween(0, 4),
+                windSpeed: generateFloatBetween(0, 50)
             }
         }
 
@@ -95,7 +97,20 @@ const emptyDatabase = async() => {
     console.log('Tout a été supprimé')
 }
 
+const createStation = async(name) => {
 
+    const item = new Station({
+        "stationName": "ESIEE-1"
+    })
+
+    await item.save()
+    console.log("Station créée")
+
+}
+
+
+
+//createStation()
 genererData()
 //emptyDatabase()
 
